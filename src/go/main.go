@@ -20,7 +20,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	db, err := sql.Open("mysql", "root@/sample")
+	db, err := sql.Open("mysql", "root:root@/sample")
 	if err != nil {
 		fmt.Println("can not connect")
 		panic(err)
