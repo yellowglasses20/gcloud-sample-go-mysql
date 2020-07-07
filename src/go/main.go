@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", handler)
+	http.HandleFunc("/mysql", handler)
 	http.HandleFunc("/hello", hello)
 	http.ListenAndServe(":8080", nil)
 }
