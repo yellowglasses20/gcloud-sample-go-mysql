@@ -31,7 +31,7 @@ spec:
       containers:
       - name: hello-cloudbuild
         #image: gcr.io/go-mysql-282504/hello-cloudbuild:641b6e8
-        image: gcr.io/${PROJECT_ID}/hello-cloudbuild:${SHORT_SHA}
+        image: gcr.io/GOOGLE_CLOUD_PROJECT/hello-cloudbuild:COMMIT_SHA
         ports:
         - containerPort: 8080
       - name: cloudsql-proxy
