@@ -10,15 +10,23 @@ import (
 
 func main() {
 	http.HandleFunc("/", handler)
+	http.HandleFunc("/hello", hello)
 	http.ListenAndServe(":8080", nil)
+}
+
+func hello(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("hello"))
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	db, err := sql.Open("mysql", "root@/sample")
 	if err != nil {
-		w.WriteHeader(http.StatusServiceUnavailable)
-		w.Write([]byte(err.Error()))
-		return
+		fmt.Println("can not connect")
+		panic(err)
+		//w.WriteHeader(http.StatusServiceUnavailable)
+		//w.Write([]byte(err.Error()))
+		//return
 	}
 
 	defer db.Close()
@@ -26,9 +34,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query("SELECT * FROM users")
 	defer rows.Close()
 	if err != nil {
-		w.WriteHeader(http.StatusServiceUnavailable)
-		w.Write([]byte(err.Error()))
-		return
+		fmt.Println("can not connect users tables")
+		panic(err)
+		//w.WriteHeader(http.StatusServiceUnavailable)
+		//w.Write([]byte(err.Error()))
+		//return
 	}
 
 	for rows.Next() {
